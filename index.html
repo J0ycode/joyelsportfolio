@@ -22,7 +22,7 @@
         content="Joyel Joe Josh, Joyel Joe, Joyel Josh, Joyel Joe Josh Portfolio, Software Engineer Joyel Joe Josh, Developer Joyel Joe Josh, BTech Student Joyel Joe Josh, Full-Stack Developer Kerala, Web Developer India, UI Designer Joyel Joe Josh">
     <meta name="author" content="Joyel Joe Josh">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="theme-color" content="#060608">
+    <meta name="theme-color" content="#050508">
     <meta name="geo.region" content="IN-KL" />
     <meta name="geo.placename" content="Kerala" />
     <meta name="geo.position" content="10.850500;76.271100" />
@@ -70,9 +70,9 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
-    <!-- ══ FONTS (display=swap for CLS performance) ══ -->
+    <!-- ══ FONTS ══ -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Space+Grotesk:wght@400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- ══ CRITICAL STYLES ══ -->
@@ -113,23 +113,6 @@
     }
     </script>
     <script type="application/ld+json">
-    [
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Joyel Joe Josh Portfolio",
-            "url": "https://joyeljoejosh.vercel.app/",
-            "description": "Personal portfolio website of Joyel Joe Josh — B.Tech student, full-stack web developer, UI/UX designer, software engineer, and tech founder in India.",
-            "author": {
-                "@type": "Person",
-                "name": "Joyel Joe Josh"
-            },
-            "headline": "Joyel Joe Josh | Full-Stack Web Developer, UI/UX Designer & Tech Founder",
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://joyeljoejosh.vercel.app/#projects",
-                "query-input": "required name=search_term_string"
-            }
         },
         {
             "@context": "https://schema.org",
@@ -140,6 +123,24 @@
                 "name": "Home",
                 "item": "https://joyeljoejosh.vercel.app/"
             }]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "TJ Rubbers Billing Software",
+              "url": "https://github.com/J0ycode/tjrubbers"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Premium Frontend Portfolio",
+              "url": "https://joyeljoejosh.vercel.app/"
+            }
+          ]
         }
     ]
     </script>
@@ -170,9 +171,8 @@
     <div class="scroll-progress-bar" id="scrollProgress" role="progressbar" aria-label="Page scroll progress"
         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
-    <!-- ── BACKGROUND CANVAS (WebGL Holographic) ── -->
-    <!-- The project ID "dD3B6ZlOaN7tDqFExX1w" is a known premium dark mesh template -->
-    <div id="bgCanvas" aria-hidden="true" data-us-project="dD3B6ZlOaN7tDqFExX1w"></div>
+    <!-- ── GLOBAL BACKGROUND CANVAS ── -->
+    <canvas id="globalParticles" aria-hidden="true"></canvas>
 
     <!-- ── NAV ── -->
     <header id="nav" role="banner">
@@ -188,10 +188,22 @@
                 <li role="listitem"><a href="#contact" class="nav-link" data-label="Contact">Contact</a></li>
             </ul>
 
-            <!-- Theme toggle -->
-            <button class="theme-toggle" id="themeToggle" aria-label="Switch theme" title="Switch theme">
-                <span class="theme-toggle-icon" aria-hidden="true"></span>
-            </button>
+            <!-- New Uiverse Theme Toggle -->
+            <!-- New Uiverse Theme Toggle -->
+            <div class="theme-switch-container hide-mobile">
+                <label class="uiverse-box" for="themeCheckbox" title="Switch Theme">
+                    <div class="uiverse-dot"></div>
+                    <div class="uiverse-label">
+                        <input type="checkbox" id="themeCheckbox" class="uiverse-hidden-input theme-sync" />
+                        <div class="uiverse-rocket">
+                            <div class="uiverse-triangle"></div>
+                            <div class="uiverse-wing-1"></div>
+                            <div class="uiverse-wing-2"></div>
+                        </div>
+                    </div>
+                    <div class="uiverse-line"></div>
+                </label>
+            </div>
 
             <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"
                 aria-controls="mobileDrawer">
@@ -209,6 +221,23 @@
             <li><a href="#projects" class="drawer-link">Projects</a></li>
             <li><a href="#contact" class="drawer-link">Contact</a></li>
         </ul>
+        <div class="drawer-footer">
+            <p>Theme Preference</p>
+            <div class="theme-switch-container mobile-switch">
+                <label class="uiverse-box" for="themeCheckboxMobile" title="Switch Theme">
+                    <div class="uiverse-dot"></div>
+                    <div class="uiverse-label">
+                        <input type="checkbox" id="themeCheckboxMobile" class="uiverse-hidden-input theme-sync" />
+                        <div class="uiverse-rocket">
+                            <div class="uiverse-triangle"></div>
+                            <div class="uiverse-wing-1"></div>
+                            <div class="uiverse-wing-2"></div>
+                        </div>
+                    </div>
+                    <div class="uiverse-line"></div>
+                </label>
+            </div>
+        </div>
     </div>
 
     <main>
@@ -449,9 +478,6 @@
              SKILLS SECTION
         ══════════════════════════════════════ -->
         <section id="skills" class="section skills-section">
-            <canvas id="skillsCanvas" aria-label="Interactive Node Map"
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; mix-blend-mode: screen; opacity: 0;"
-                class="gsap-skill-visual"></canvas>
 
             <div class="section-inner">
                 <div class="section-tag gsap-tag" style="position: relative; z-index: 1;">Arsenal</div>
@@ -736,12 +762,14 @@
         <div class="footer-line"></div>
     </footer>
 
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js" crossorigin="anonymous"></script>
     <!-- Lenis Smooth Scroll -->
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <!-- GSAP + ScrollTrigger CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" crossorigin="anonymous"></script>
+    <!-- GSAP CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 
